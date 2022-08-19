@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<errno.h>
 #define DEFALUT_SIZE 3
 #define MAX_NAME 20
 #define MAx_SEX 5
@@ -29,15 +30,18 @@ enum Choice {
 	Search,       
 	Modify,
     Show,          
-	Sort       
+	Sort,
+	Save
 };
 
-void InitContact(struct Contact* pcon);
+int InitContact(struct Contact* pcon);
 void AddContact(struct Contact* pcon);
 void ShowContact(const struct Contact* pcon);
 void DelContact(struct Contact*con);
 void SearchContact(const struct Contact*con);
 void ModifyContact(struct Contact*con);
 void DestoryContact(struct Contact* con);
+void SaveContact(struct Contact* con);
+
 
 

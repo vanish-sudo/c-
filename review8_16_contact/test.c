@@ -1,13 +1,40 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include"contact.h"
-//初始化通讯录
-void InitContact(struct Contact* pcon) {
-	pcon->data = malloc(3 * sizeof(struct PeoInfo));
-	if (pcon != NULL) {
-		pcon->size = 0;
-		pcon->count = DEFALUT_SIZE;
+//函数声明
+void checkcapacity(struct Contact* pcon);
+static int Add_copacity(struct Contact* pcon);
+int seekContact(char* name, const struct Contact* pcon);
+//加载文件中的联系人
+void LoadContact(struct Contact* pcon){
+	struct PeoInfo tmp = { 0 };
+	FILE* pf = fopen("contact.dat", "rb");
+	if (pf == NULL)
+	{
+		printf(strerror(errno));
+		return;
 	}
+	
+	while (fread(&tmp, sizeof(struct PeoInfo), 1, pf))
+	{
+		checkcapacity(pcon);
+		pcon->data[pcon->size] = tmp;
+		pcon->size++;
+	}
+}
 
+
+
+//初始化通讯录
+int InitContact(struct Contact* pcon) {
+	pcon->data = malloc(3 * sizeof(struct PeoInfo));
+	if (pcon == NULL) {
+		printf(strerror(errno));
+		return 0;
+	}
+	pcon->size = 0;
+	pcon->count = DEFALUT_SIZE;
+	LoadContact(pcon);
+	return 1;
 }
 
 //增加容量 如果不能增加则返回0 (自己实现)
@@ -20,6 +47,7 @@ static int Add_copacity(struct Contact* pcon) {
 	return 1;
 }
 
+//增加容量
 void checkcapacity(struct Contact* pcon) {
 	if (pcon->size == pcon->count) {
 	struct PeoInfo*ptr=	(struct PeoInfo*)realloc(pcon->data, (pcon->count + 2) * sizeof(struct PeoInfo));
@@ -36,29 +64,7 @@ void checkcapacity(struct Contact* pcon) {
 void AddContact(struct Contact* pcon) {
 
 	//鹏哥做的
-	//checkcapacity(pcon);
-	//printf("请输入联系人的姓名:>\n");
-	//scanf("%s", pcon->data[pcon->size].name);
-	//printf("请输入联系人的性别:>\n");
-	//scanf("%s", pcon->data[pcon->size].sex);
-	//printf("请输入联系人的年龄:>\n");
-	//scanf("%d", &(pcon->data[pcon->size].age));
-	//printf("请输入联系人的电话:>\n");
-	//scanf("%s", pcon->data[pcon->size].tele);
-	//printf("请输入联系人的地址:>\n");
-	//scanf("%s", pcon->data[pcon->size].address);
-	//printf("添加成功\n");
-	//pcon->size++;
-
-	//自己做的
-
-	//判断通讯录是否已经满了
-	if (pcon->size == pcon->count) {
-		if (Add_copacity(pcon) == 0) {
-			printf("联系人已满");
-			return;
-		}
-	}
+	checkcapacity(pcon);
 	printf("请输入联系人的姓名:>\n");
 	scanf("%s", pcon->data[pcon->size].name);
 	printf("请输入联系人的性别:>\n");
@@ -71,6 +77,28 @@ void AddContact(struct Contact* pcon) {
 	scanf("%s", pcon->data[pcon->size].address);
 	printf("添加成功\n");
 	pcon->size++;
+
+	//自己做的
+
+	//判断通讯录是否已经满了
+	//if (pcon->size == pcon->count) {
+	//	if (Add_copacity(pcon) == 0) {
+	//		printf("联系人已满");
+	//		return;
+	//	}
+	//}
+	//printf("请输入联系人的姓名:>\n");
+	//scanf("%s", pcon->data[pcon->size].name);
+	//printf("请输入联系人的性别:>\n");
+	//scanf("%s", pcon->data[pcon->size].sex); 
+	//printf("请输入联系人的年龄:>\n");
+	//scanf("%d", &(pcon->data[pcon->size].age));
+	//printf("请输入联系人的电话:>\n");
+	//scanf("%s", pcon->data[pcon->size].tele);
+	//printf("请输入联系人的地址:>\n");
+	//scanf("%s", pcon->data[pcon->size].address);
+	//printf("添加成功\n");
+	//pcon->size++;
 
 
 	//判断通讯录是否已经满了
@@ -185,14 +213,27 @@ void ModifyContact(struct Contact* pcon){
 	printf("修改成功\n");
 }
 
-
-
-
-
-
-
 //释放内存
 void DestoryContact(struct Contact* pcon) {
+	SaveContact(pcon);
 	free(pcon->data);
 	pcon->data = NULL;
+}
+
+//保存联系人
+void SaveContact(struct Contact* pcon) {
+	//打开文件
+	FILE* pf = fopen("contact.dat", "wb");
+	if (pf == NULL) {
+		printf(strerror(errno));
+		return;
+	}
+	//写入文件
+	int i = 0;
+	for (i = 0; i < pcon->size; i++) {
+		fwrite(&(pcon->data[i]), sizeof(struct PeoInfo), 1, pf);
+	}
+	printf("保存成功\n");
+	fclose(pf);
+	pf = NULL;
 }
