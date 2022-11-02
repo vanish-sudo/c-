@@ -1,0 +1,16 @@
+﻿  review001.c
+C:\Users\汤家豪\source\repos\revie01\review001.c(27,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+C:\Users\汤家豪\source\repos\revie01\review001.c(27,9): message : 请考虑在格式字符串中使用“%zd”
+C:\Users\汤家豪\source\repos\revie01\review001.c(28,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+C:\Users\汤家豪\source\repos\revie01\review001.c(28,9): message : 请考虑在格式字符串中使用“%zd”
+C:\Users\汤家豪\source\repos\revie01\review001.c(29,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+C:\Users\汤家豪\source\repos\revie01\review001.c(29,9): message : 请考虑在格式字符串中使用“%zd”
+C:\Users\汤家豪\source\repos\revie01\review001.c(30,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+C:\Users\汤家豪\source\repos\revie01\review001.c(30,9): message : 请考虑在格式字符串中使用“%zd”
+C:\Users\汤家豪\source\repos\revie01\review001.c(31,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+C:\Users\汤家豪\source\repos\revie01\review001.c(31,9): message : 请考虑在格式字符串中使用“%zd”
+C:\Users\汤家豪\source\repos\revie01\review001.c(32,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+C:\Users\汤家豪\source\repos\revie01\review001.c(32,9): message : 请考虑在格式字符串中使用“%zd”
+C:\Users\汤家豪\source\repos\revie01\review001.c(33,9): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“size_t”
+C:\Users\汤家豪\source\repos\revie01\review001.c(33,9): message : 请考虑在格式字符串中使用“%zd”
+  revie01.vcxproj -> C:\Users\汤家豪\source\repos\revie01\x64\Debug\revie01.exe
